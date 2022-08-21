@@ -1,4 +1,5 @@
-const { ErrorName, StatusCode, errorMessage } = require('../constants/api');
+const mongoose = require('mongoose');
+const { StatusCode, errorMessage } = require('../constants/api');
 const NotFound = require('../errors/not-found');
 
 module.exports.handleError = (err, res) => {
@@ -6,7 +7,7 @@ module.exports.handleError = (err, res) => {
     res.status(StatusCode.NOT_FOUND).send(err);
     return;
   }
-  if (err.name === ErrorName.CAST_ERROR || err.name === ErrorName.VALIDATION_ERROR) {
+  if (err instanceof mongoose.Error.ValidationError || err instanceof mongoose.Error.CastError) {
     res.status(StatusCode.BAD_REQUEST).send({ message: errorMessage[StatusCode.BAD_REQUEST] });
     return;
   }

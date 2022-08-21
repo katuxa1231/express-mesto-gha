@@ -10,9 +10,4 @@ const errorMessage = {
   [StatusCode.INTERNAL_SERVER_ERROR]: (message) => `На сервере произошла ошибка: ${message}`,
 };
 
-const ErrorName = {
-  CAST_ERROR: 'CastError',
-  VALIDATION_ERROR: 'ValidationError',
-};
-
-module.exports = { StatusCode, ErrorName, errorMessage };
+module.exports = { StatusCode, errorMessage };
