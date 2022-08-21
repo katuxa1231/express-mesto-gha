@@ -7,7 +7,7 @@ const StatusCode = {
 const errorMessage = {
   [StatusCode.NOT_FOUND]: 'Данные по указанному _id не найдены',
   [StatusCode.BAD_REQUEST]: 'Переданы некорректные данные',
-  [StatusCode.INTERNAL_SERVER_ERROR]: (err) => `На сервере произошла ошибка: ${err}`,
+  [StatusCode.INTERNAL_SERVER_ERROR]: (message) => `На сервере произошла ошибка: ${message}`,
 };
 
 const ErrorName = {
