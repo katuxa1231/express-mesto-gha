@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const { StatusCode } = require('./constants/api');
 
 const { PORT = 3000 } = process.env;
 
@@ -19,5 +20,9 @@ app.use((req, res, next) => {
 });
 app.use('/', require('./routes/users'));
 app.use('/', require('./routes/cards'));
+
+app.use('/*', (req, res) => {
+  res.status(StatusCode.NOT_FOUND).send({ message: 'Путь не существует' });
+});
 
 app.listen(PORT);
