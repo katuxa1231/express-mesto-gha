@@ -15,7 +15,7 @@ module.exports.login = (req, res, next) => {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
         sameSite: true,
-      }).end();
+      }).send({ data: user });
     })
     .catch(next);
 };
@@ -51,7 +51,9 @@ module.exports.createUser = (req, res, next) => {
     .then((hash) => User.create({
       name, about, avatar, email, password: hash,
     }))
-    .then((user) => res.status(201).send({ data: user }))
+    .then((user) => {
+      res.status(201).send({ data: user });
+    })
     .catch(next);
 };
 

@@ -20,4 +20,5 @@ module.exports.handleError = (err, req, res, next) => {
         ? errorMessage[StatusCode.INTERNAL_SERVER_ERROR](err.message)
         : message,
     });
+  next();
 };

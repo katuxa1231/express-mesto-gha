@@ -9,7 +9,7 @@ router.get('/users', getUsers);
 router.get('/users/me', getCurrentUser);
 router.get('/users/:userId', celebrate({
   params: {
-    cardId: validationParam.id,
+    userId: validationParam.id,
   },
 }), getUser);
 router.patch('/users/me', celebrate({
