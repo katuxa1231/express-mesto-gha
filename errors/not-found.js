@@ -1,7 +1,9 @@
+const { StatusCode } = require('../constants/api');
+
 class NotFound extends Error {
   constructor(message) {
-    super();
-    this.message = message;
+    super(message);
+    this.statusCode = StatusCode.NOT_FOUND;
   }
 }
 
