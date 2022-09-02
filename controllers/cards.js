@@ -2,6 +2,7 @@ const Card = require('../models/card');
 const NotFound = require('../errors/not-found');
 const { errorMessage, StatusCode } = require('../constants/api');
 const BadRequest = require('../errors/bad-request');
+const Forbidden = require('../errors/forbidden');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
@@ -43,7 +44,7 @@ module.exports.deleteCard = (req, res, next) => {
   Card.findOne({ _id: req.params.cardId })
     .then((card) => {
       if (!card) {
-        throw new NotFound(errorMessage[StatusCode.NOT_FOUND]);
+        throw new Forbidden(errorMessage[StatusCode.FORBIDDEN]);
       }
 
       if (card.owner.toString() !== req.user._id) {
