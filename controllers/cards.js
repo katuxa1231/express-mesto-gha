@@ -50,8 +50,7 @@ module.exports.deleteCard = (req, res, next) => {
       if (card.owner.toString() !== req.user._id) {
         throw new BadRequest('Карточка может быть удалена только создателем');
       }
-      card.delete();
-      res.send(card);
+      card.delete(res.send(card));
     })
     .catch(next);
 };

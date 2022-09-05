@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { PRIVATE_KEY } = require('../constants/keys');
 const { StatusCode, errorMessage } = require('../constants/api');
+const Unauthorized = require('../errors/unauthorized');
 
 // eslint-disable-next-line consistent-return
 module.exports.auth = (req, res, next) => {
@@ -10,9 +11,7 @@ module.exports.auth = (req, res, next) => {
   try {
     payload = jwt.verify(token, PRIVATE_KEY);
   } catch (err) {
-    return res
-      .status(StatusCode.UNAUTHORIZED)
-      .send({ message: errorMessage[StatusCode.UNAUTHORIZED] });
+    next(new Unauthorized(errorMessage[StatusCode.UNAUTHORIZED]));
   }
 
   req.user = payload;

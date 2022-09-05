@@ -27,17 +27,11 @@ app.post('/signin', celebrate({
   },
 }), login);
 app.post('/signup', celebrate({
-  body: {
-    email: validationModel.user.email,
-    password: validationModel.user.password,
-    name: validationModel.user.name,
-    about: validationModel.user.about,
-    avatar: validationModel.user.avatar,
-  },
+  body: validationModel.user,
 }), createUser);
 app.use(auth);
-app.use('/', require('./routes/users'));
-app.use('/', require('./routes/cards'));
+app.use('/users', require('./routes/users'));
+app.use('/cards', require('./routes/cards'));
 
 app.use('/*', (req, res) => {
   res.status(StatusCode.NOT_FOUND).send({ message: 'Путь не существует' });

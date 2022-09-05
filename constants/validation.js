@@ -1,4 +1,5 @@
 const { Joi } = require('celebrate');
+const mongoose = require('mongoose');
 
 const linkRegExp = /https?:\/\/(www.)?[\w-]*\.\w\/?[\w\-._~:/?#[\]@!$&'()*+,;=]*/i;
 
@@ -17,7 +18,12 @@ const validationModel = {
 };
 
 const validationParam = {
-  id: Joi.string().alphanum().length(24),
+  id: Joi.string().custom((value, helpers) => {
+    if (!mongoose.isObjectIdOrHexString(value)) {
+      return helpers.message('Параметр невалиден');
+    }
+    return value;
+  }),
 };
 
 module.exports = { validationModel, validationParam, linkRegExp };

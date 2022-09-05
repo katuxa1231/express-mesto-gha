@@ -5,24 +5,24 @@ const {
 } = require('../controllers/cards');
 const { validationModel, validationParam } = require('../constants/validation');
 
-router.get('/cards', getCards);
-router.post('/cards', celebrate({
+router.get('', getCards);
+router.post('', celebrate({
   body: {
     name: validationModel.card.name,
     link: validationModel.card.link,
   },
 }), createCard);
-router.put('/cards/:cardId/likes', celebrate({
+router.put('/:cardId/likes', celebrate({
   params: {
     cardId: validationParam.id,
   },
 }), likeCard);
-router.delete('/cards/:cardId/likes', celebrate({
+router.delete('/:cardId/likes', celebrate({
   params: {
     cardId: validationParam.id,
   },
 }), dislikeCard);
-router.delete('/cards/:cardId', celebrate({
+router.delete('/:cardId', celebrate({
   params: {
     cardId: validationParam.id,
   },
